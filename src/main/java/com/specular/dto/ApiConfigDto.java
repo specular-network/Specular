@@ -15,16 +15,8 @@ import javax.persistence.Id;
  * @Description:
  */
 
-
 @Data
-public class UserDto {
-    /**
-     * 主键ID
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String username;
-    
+public class ApiConfigDto {
+    String version;
+    String minVersion;
 }
