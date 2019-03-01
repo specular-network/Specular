@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,16 +19,15 @@ import java.io.PrintStream;
 
 /**
  * @author jzx
- * @Package com.specular.product.handler
+ * @Package com.specular.handler
  * @Description:
  * @date 2018/7/19上午1:23
  */
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = BusinessException.class)
-    @ResponseBody
     public ResponseDto handlerBusinessException(BusinessException ex){
         ResponseDto responseDto=new ResponseDto();
         responseDto.setCode(ex.getCode());
@@ -35,16 +35,15 @@ public class GlobalExceptionHandler {
         responseDto.setData(ex.getData());
         return  responseDto;
     }
-
-
-
-    @ExceptionHandler(value = Exception.class)
-    @ResponseBody
+    
+    
+    
+    @ExceptionHandler(value = java.lang.Exception.class)
     public ResponseDto exceptionGet(Exception e){
         ResponseDto responseDto=new ResponseDto();
         responseDto.setCode(-1);
         responseDto.setMsg(e.getMessage());
-        responseDto.setData(new Object());
+        responseDto.setData(null);
         return  responseDto;
     }
 

@@ -29,7 +29,7 @@ public class PassportController extends PublicController {
      * @throws Exception
      */
     @RequestMapping("/login")
-    public ResponseDto login(@RequestBody LoginForm loginForm) throws Exception {
+    public ResponseDto login(@RequestBody LoginForm loginForm){
         System.out.println(loginForm);
         return success(authService.login());
     }
