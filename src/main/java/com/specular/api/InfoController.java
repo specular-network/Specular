@@ -2,14 +2,16 @@ package com.specular.api;
 
 import com.specular.base.controller.PublicController;
 import com.specular.base.dto.ResponseDto;
+import com.specular.config.ApiConfig;
 import com.specular.config.AppConfig;
-import com.specular.form.LoginForm;
 import com.specular.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author jzx
@@ -17,9 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  */
 @RestController
-@RequestMapping("api/test")
+@RequestMapping("api/info")
 @Slf4j
-public class TestController extends PublicController {
-    
-    
+public class InfoController extends PublicController {
+
 }
