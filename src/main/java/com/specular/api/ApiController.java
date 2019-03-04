@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ApiController extends PublicController {
     
-    @Autowired
-    AuthService authService;
     
     @Autowired
     ApiConfig apiConfig;

@@ -1,6 +1,7 @@
 package com.specular.form;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 /**
  * @author jzx
@@ -8,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @Description:
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 public class RegisterForm {
     String username;
+    String password;
     String email;
 }

@@ -2,6 +2,9 @@ package com.specular.service;
 
 import com.specular.dto.UserDto;
 import com.specular.entity.User;
+import com.specular.form.LoginForm;
+import com.specular.form.LogoutForm;
+import com.specular.form.RegisterForm;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.List;
@@ -16,9 +19,9 @@ public interface AuthService {
      * 登录
      * @return
      */
-    UserDto login();
+    UserDto login(LoginForm loginForm);
     
-    Boolean logout();
+    Boolean logout(LogoutForm logoutForm);
     
-    UserDto register();
+    UserDto register(RegisterForm registerForm);
 }

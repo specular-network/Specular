@@ -27,4 +27,11 @@ public class User {
     private String username;
     
     private String password;
+    private String email;
+    
+    private String tokenCode;
+    
+    private Integer createdAt;
+    private Integer updatedAt;
+    private Integer deletedAt;
 }

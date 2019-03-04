@@ -1,5 +1,6 @@
 package com.specular.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -24,4 +25,6 @@ public class UserDto {
     
     private String username;
     
+    @JsonProperty("token")
+    private String tokenCode;
 }

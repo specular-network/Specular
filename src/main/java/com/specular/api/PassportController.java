@@ -4,6 +4,8 @@ import com.specular.base.controller.BaseController;
 import com.specular.base.controller.PublicController;
 import com.specular.base.dto.ResponseDto;
 import com.specular.form.LoginForm;
+import com.specular.form.LogoutForm;
+import com.specular.form.RegisterForm;
 import com.specular.service.AuthService;
 import com.specular.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +27,34 @@ public class PassportController extends PublicController {
     
     /**
      * 登录
+     *
      * @return
      * @throws Exception
      */
     @RequestMapping("/login")
-    public ResponseDto login(@RequestBody LoginForm loginForm){
-        System.out.println(loginForm);
-        return success(authService.login());
+    public ResponseDto login(@RequestBody LoginForm loginForm) {
+        return success(authService.login(loginForm));
     }
     
     /**
      * 退出
+     *
      * @return
      * @throws Exception
      */
     @RequestMapping("/logout")
-    public ResponseDto logout() throws Exception {
-        return success(authService.logout());
+    public ResponseDto logout(@RequestBody LogoutForm logoutForm) {
+        return success(authService.logout(logoutForm));
     }
     
     /**
      * 注册
+     *
      * @return
      * @throws Exception
      */
     @RequestMapping("/register")
-    public ResponseDto register() throws Exception {
-        return success(authService.register());
+    public ResponseDto register(@RequestBody RegisterForm registerForm) {
+        return success(authService.register(registerForm));
     }
 }
