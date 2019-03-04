@@ -18,11 +18,8 @@ import javax.persistence.Id;
 
 @Data
 public class UserDto {
-    /**
-     * 主键ID
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    
     private Long id;
     
     private String username;
