@@ -1,5 +1,6 @@
 package com.specular.entity;
 
+import com.specular.listener.UserListener;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -16,6 +17,7 @@ import javax.persistence.*;
 @Data
 @SQLDelete(sql = "update user set deleted_at = UNIX_TIMESTAMP() where id = ?")
 @Where(clause = "deleted_at = 0")
+@EntityListeners(UserListener.class)
 public class User {
     /**
      * 主键ID
@@ -28,6 +30,7 @@ public class User {
     
     private String password;
     private String email;
+    private String phone;
     
     private String tokenCode;
     

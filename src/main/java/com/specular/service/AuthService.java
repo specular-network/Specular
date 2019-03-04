@@ -1,13 +1,9 @@
 package com.specular.service;
 
 import com.specular.dto.UserDto;
-import com.specular.entity.User;
 import com.specular.form.LoginForm;
 import com.specular.form.LogoutForm;
 import com.specular.form.RegisterForm;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.List;
 
 /**
  * @author jzx
@@ -21,7 +17,29 @@ public interface AuthService {
      */
     UserDto login(LoginForm loginForm);
     
+    /**
+     * 退出登录
+     * @param logoutForm
+     * @return
+     */
     Boolean logout(LogoutForm logoutForm);
     
+    /**
+     * 注册
+     * @param registerForm
+     * @return
+     */
     UserDto register(RegisterForm registerForm);
+    
+    /**
+     * 邮箱验证
+     * @param phone
+     */
+    void sendMailVerif(String phone);
+    
+    /**
+     * 短信验证
+     * @param email
+     */
+    void sendSmsVerif(String email);
 }

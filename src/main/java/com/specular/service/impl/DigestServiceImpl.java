@@ -7,8 +7,6 @@ import com.specular.service.DigestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
-
 /**
  * @author jzx
  * @date 2019/03/04 09:55

@@ -1,13 +1,11 @@
 package com.specular.api;
 
-import com.specular.base.controller.BaseController;
 import com.specular.base.controller.PublicController;
 import com.specular.base.dto.ResponseDto;
 import com.specular.form.LoginForm;
 import com.specular.form.LogoutForm;
 import com.specular.form.RegisterForm;
 import com.specular.service.AuthService;
-import com.specular.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

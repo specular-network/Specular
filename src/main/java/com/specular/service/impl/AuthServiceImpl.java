@@ -15,12 +15,10 @@ import com.specular.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -96,6 +94,7 @@ public class AuthServiceImpl implements AuthService {
         user.setDeletedAt(0);
         user.setMailboxValidation(0);
         user.setSmsValidation(0);
+        user.setPhone(registerForm.getPhone());
         user.setLastLoginIp(httpServletRequest.getRemoteAddr());
         String userAgent = httpServletRequest.getHeader(HttpHeaders.USER_AGENT);
         if (userAgent.isEmpty()) {
@@ -107,5 +106,25 @@ public class AuthServiceImpl implements AuthService {
         user = userRepository.save(user);
         BeanUtils.copyProperties(user, userDto);
         return userDto;
+    }
+    
+    /**
+     * TODO
+     * @param phone
+     */
+    @Override
+    @Async
+    public void sendMailVerif(String phone) {
+        log.info(">>> send mail verif");
+    }
+    
+    /**
+     * TODO
+     * @param phone
+     */
+    @Override
+    @Async
+    public void sendSmsVerif(String email) {
+        log.info(">>> send sms verif");
     }
 }

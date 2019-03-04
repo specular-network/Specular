@@ -11,7 +11,20 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class RegisterForm {
+    /**
+     * 用户名
+     */
     String username;
+    /**
+     * 用户密码
+     */
     String password;
+    /**
+     * 用户邮箱
+     */
     String email;
+    /**
+     * 手机号
+     */
+    String phone;
 }
