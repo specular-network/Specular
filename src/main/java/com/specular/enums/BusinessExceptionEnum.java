@@ -13,6 +13,7 @@ public enum BusinessExceptionEnum implements IExceptionEnum {
     USER_NOT_FOUND_ERROR(10001,"用户名密码错误"),
     USER_NAME_ALREADY_EXISTS(10002,"用户名已经存在"),
     MAILBOX_IS_ALREADY_OCCUPIED(10003,"邮箱已经被占用"),
+    USER_IS_BAN(10004,"账户已经被禁用"),
     
     
     SYSTEM_ERROR(-1,"未知异常");

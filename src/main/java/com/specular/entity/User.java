@@ -32,6 +32,13 @@ public class User {
     private String email;
     private String phone;
     
+    /**
+     * 账户禁用状态 0 为正常状态
+     */
+    private Integer ban;
+    /**
+     * 用户登录token
+     */
     private String tokenCode;
     
     /**

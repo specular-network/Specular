@@ -15,9 +15,19 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DailySchedule {
     
-    @Scheduled(cron = "0 0 0/1 * * ?")
-    public void doSomething(){
-        log.info("daily job");
+    /**
+     * 发送给管理人员
+     */
+    @Scheduled(cron = "0 0 22 * * ?")
+    public void siteReport(){
+        log.info("siteReport repo");
     }
-
+    
+    /**
+     * 发送给客户
+     */
+    @Scheduled(cron = "0 0 8 * * ?")
+    public void dailyReport(){
+        log.info("dailyReport repo");
+    }
 }

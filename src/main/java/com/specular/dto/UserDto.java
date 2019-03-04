@@ -18,6 +18,15 @@ public class UserDto {
     
     private String username;
     
+    private String email;
+    
+    private String phone;
+    
+    /**
+     * 账户禁用状态 0 为正常状态
+     */
+    private Integer ban;
+    
     @JsonProperty("token")
     private String tokenCode;
 }

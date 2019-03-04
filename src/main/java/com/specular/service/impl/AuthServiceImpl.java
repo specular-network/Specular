@@ -45,6 +45,9 @@ public class AuthServiceImpl implements AuthService {
         Optional<User> user = userRepository.findFirstByUsername(loginForm.getUsername());
         user.orElseThrow(() -> new BusinessException(BusinessExceptionEnum.USER_NOT_FOUND_ERROR));
         user.ifPresent(user1 -> {
+            if(!user1.getBan().equals(0)){
+                throw new BusinessException(BusinessExceptionEnum.USER_IS_BAN);
+            }
             if (digestService.encrypt(loginForm.getPassword()).equals(user1.getPassword())) {
                 user1.setTokenCode(UUID.randomUUID().toString());
                 user1.setLastLoginIp(httpServletRequest.getRemoteAddr());

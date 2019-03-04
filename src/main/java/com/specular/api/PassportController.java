@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author jzx
  * @date 2019/02/25 10:46
- * @Description:
  */
 @RestController
 @RequestMapping("api/passport")
@@ -27,7 +26,6 @@ public class PassportController extends PublicController {
      * 登录
      *
      * @return
-     * @throws Exception
      */
     @RequestMapping("/login")
     public ResponseDto login(@RequestBody LoginForm loginForm) {
@@ -38,7 +36,6 @@ public class PassportController extends PublicController {
      * 退出
      *
      * @return
-     * @throws Exception
      */
     @RequestMapping("/logout")
     public ResponseDto logout(@RequestBody LogoutForm logoutForm) {
@@ -49,7 +46,6 @@ public class PassportController extends PublicController {
      * 注册
      *
      * @return
-     * @throws Exception
      */
     @RequestMapping("/register")
     public ResponseDto register(@RequestBody RegisterForm registerForm) {
