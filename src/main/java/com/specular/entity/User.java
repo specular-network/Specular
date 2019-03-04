@@ -31,6 +31,23 @@ public class User {
     
     private String tokenCode;
     
+    /**
+     * 邮箱验证
+     */
+    private Integer mailboxValidation;
+    /**
+     * 短信验证
+     */
+    private Integer smsValidation;
+    /**
+     * 最后登录ip
+     */
+    private String lastLoginIp;
+    /**
+     * 最后登录ip
+     */
+    private String lastLoginUa;
+    
     private Integer createdAt;
     private Integer updatedAt;
     private Integer deletedAt;

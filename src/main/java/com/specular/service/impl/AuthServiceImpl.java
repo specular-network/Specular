@@ -1,5 +1,6 @@
 package com.specular.service.impl;
 
+import com.google.common.net.HttpHeaders;
 import com.specular.dto.UserDto;
 import com.specular.entity.User;
 import com.specular.enums.BusinessExceptionEnum;
@@ -11,11 +12,14 @@ import com.specular.repository.UserRepository;
 import com.specular.service.AuthService;
 import com.specular.service.DigestService;
 import com.specular.util.DateUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,7 +30,11 @@ import java.util.UUID;
  * @Description:
  */
 @Service
+@Slf4j
 public class AuthServiceImpl implements AuthService {
+    @Autowired
+    HttpServletRequest httpServletRequest;
+    
     @Autowired
     UserRepository userRepository;
     
@@ -35,19 +43,27 @@ public class AuthServiceImpl implements AuthService {
     
     @Override
     public UserDto login(LoginForm loginForm) {
-        UserDto userDto=new UserDto();
-        Optional<User> user=userRepository.findFirstByUsername(loginForm.getUsername());
-        user.orElseThrow(()->new BusinessException(BusinessExceptionEnum.USER_NOT_FOUND_ERROR));
+        UserDto userDto = new UserDto();
+        Optional<User> user = userRepository.findFirstByUsername(loginForm.getUsername());
+        user.orElseThrow(() -> new BusinessException(BusinessExceptionEnum.USER_NOT_FOUND_ERROR));
         user.ifPresent(user1 -> {
-            if(digestService.encrypt(loginForm.getPassword()).equals(user1.getPassword())){
+            if (digestService.encrypt(loginForm.getPassword()).equals(user1.getPassword())) {
                 user1.setTokenCode(UUID.randomUUID().toString());
+                user1.setLastLoginIp(httpServletRequest.getRemoteAddr());
+                String userAgent = httpServletRequest.getHeader(HttpHeaders.USER_AGENT);
+                if (userAgent.isEmpty()) {
+                    log.info("User-Agent is Empty");
+                    user1.setLastLoginUa("");
+                } else {
+                    user1.setLastLoginUa(httpServletRequest.getHeader(HttpHeaders.USER_AGENT));
+                }
                 userRepository.save(user1);
-                BeanUtils.copyProperties(user1,userDto);
-            }else {
-                throw  new BusinessException(BusinessExceptionEnum.LOGIN_ERROR);
+                BeanUtils.copyProperties(user1, userDto);
+            } else {
+                throw new BusinessException(BusinessExceptionEnum.LOGIN_ERROR);
             }
         });
-        return  userDto;
+        return userDto;
     }
     
     @Override
@@ -58,6 +74,7 @@ public class AuthServiceImpl implements AuthService {
     
     /**
      * TODO 用户名邮箱格式验证
+     *
      * @param registerForm
      * @return
      */
@@ -69,16 +86,26 @@ public class AuthServiceImpl implements AuthService {
         userRepository.findFirstByEmail(registerForm.getEmail()).ifPresent(user1 -> {
             throw new BusinessException(BusinessExceptionEnum.MAILBOX_IS_ALREADY_OCCUPIED);
         });
-        UserDto userDto=new UserDto();
-        User user=new User();
-        BeanUtils.copyProperties(registerForm,user);
+        UserDto userDto = new UserDto();
+        User user = new User();
+        BeanUtils.copyProperties(registerForm, user);
         user.setPassword(digestService.encrypt(registerForm.getPassword()));
         user.setTokenCode(UUID.randomUUID().toString());
         user.setCreatedAt(DateUtils.getTimeSpan());
         user.setUpdatedAt(DateUtils.getTimeSpan());
         user.setDeletedAt(0);
-        user=userRepository.save(user);
-        BeanUtils.copyProperties(user,userDto);
-        return  userDto;
+        user.setMailboxValidation(0);
+        user.setSmsValidation(0);
+        user.setLastLoginIp(httpServletRequest.getRemoteAddr());
+        String userAgent = httpServletRequest.getHeader(HttpHeaders.USER_AGENT);
+        if (userAgent.isEmpty()) {
+            log.info("User-Agent is Empty");
+            user.setLastLoginUa("");
+        } else {
+            user.setLastLoginUa(httpServletRequest.getHeader(HttpHeaders.USER_AGENT));
+        }
+        user = userRepository.save(user);
+        BeanUtils.copyProperties(user, userDto);
+        return userDto;
     }
 }
