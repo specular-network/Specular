@@ -20,24 +20,21 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 @Slf4j
 
-public class LogAspect {
+public class AccessLogAspect {
     // default implementation ignored
-    @Pointcut("execution(public * com.specular..controller.*.*(..))")
-    public void log(){
+    @Pointcut("execution(public * com.specular..api.*.*(..))")
+    public void log() {
     
     }
     
     @Before("log()")
-    public void doBefore(JoinPoint joinpoint){
+    public void doBefore(JoinPoint joinpoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         //过滤info请求
-        if(!request.getRequestURI().endsWith("info/")){
-            // Aspect
-            log.info("url={} \r\n method={} \r\n id={} \r\n class_method={} \r\n args={}",
-                    request.getRequestURL(),request.getMethod(),request.getRemoteAddr()
-                    ,joinpoint.getSignature().getDeclaringTypeName() + "," + joinpoint.getSignature().getName(),
-                    joinpoint.getArgs());
-        }
+        log.info("url={}  method={} ip={}  class_method={}  args={}",
+                request.getRequestURL(), request.getMethod(), request.getRemoteAddr()
+                , joinpoint.getSignature().getDeclaringTypeName() + "," + joinpoint.getSignature().getName(),
+                joinpoint.getArgs());
     }
 }

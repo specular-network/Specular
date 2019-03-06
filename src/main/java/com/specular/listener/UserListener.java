@@ -24,7 +24,6 @@ public class UserListener {
     
     @PostPersist
     void onPostPersist(User user) {
-        log.info(">>> Organization init");
         this.authService= SpringUtil.getBean(AuthService.class);
         authService.sendMailVerif(user.getPhone());
         authService.sendSmsVerif(user.getEmail());

@@ -20,18 +20,18 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 @Slf4j
 
-public class AccessAspect {
-    // default implementation ignored
+public class AuthAspect {
+    
     @Pointcut(value = "@annotation(com.specular.annotation.Auth)")
-    public void log(){
+    public void auth(){
     
     }
     
-    @Before("log()")
+    @Before("auth()")
     public void doBefore(JoinPoint joinpoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        //过滤info请求
+        //TODO 授权检查
         log.info("授权检查");
     }
 }
