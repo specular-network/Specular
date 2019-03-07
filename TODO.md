@@ -21,6 +21,7 @@
 -  =  web App
 -  =  android App
 -  =  ios App
+-  =  国际化支持
 
 #### 低优先级
 -  mergeService
