@@ -14,7 +14,7 @@ cache:
   - "$HOME/.cache"
 deploy:
   provider: script
-  script: "mvn deploy"
+  script: "clean install -Dmaven.test.skip=true -Ptest"
   skip_cleanup: true
   on:
     tags: true
