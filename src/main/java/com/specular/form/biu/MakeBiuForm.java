@@ -1,6 +1,7 @@
-package com.specular.form;
+package com.specular.form.biu;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.specular.form.auth.BaseAuthForm;
 import lombok.Data;
 
 /**
@@ -10,6 +11,6 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LogoutForm {
-    String token;
+public class MakeBiuForm extends BaseAuthForm {
+    String content;
 }

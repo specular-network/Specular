@@ -5,9 +5,9 @@ import com.specular.dto.UserDto;
 import com.specular.entity.User;
 import com.specular.enums.BusinessExceptionEnum;
 import com.specular.exception.BusinessException;
-import com.specular.form.LoginForm;
-import com.specular.form.LogoutForm;
-import com.specular.form.RegisterForm;
+import com.specular.form.passport.LoginForm;
+import com.specular.form.passport.LogoutForm;
+import com.specular.form.passport.RegisterForm;
 import com.specular.repository.UserRepository;
 import com.specular.service.AuthService;
 import com.specular.service.DigestService;
@@ -123,11 +123,19 @@ public class AuthServiceImpl implements AuthService {
     
     /**
      * TODO
-     * @param phone
+     * @param email
      */
     @Override
     @Async
     public void sendSmsVerif(String email) {
         log.info(">>> send sms verif");
+    }
+    
+    @Override
+    public UserDto getUserInfoByToken(String token) {
+        UserDto userDto=new UserDto();
+        User user=userRepository.findFirstByTokenCode(token).orElseThrow(()->new BusinessException(BusinessExceptionEnum.TOKEN_NOT_FOUND_ERROR));
+        BeanUtils.copyProperties(user,userDto);
+        return  userDto;
     }
 }

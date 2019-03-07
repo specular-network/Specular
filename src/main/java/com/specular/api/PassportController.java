@@ -2,9 +2,9 @@ package com.specular.api;
 
 import com.specular.base.controller.PublicController;
 import com.specular.base.dto.ResponseDto;
-import com.specular.form.LoginForm;
-import com.specular.form.LogoutForm;
-import com.specular.form.RegisterForm;
+import com.specular.form.passport.LoginForm;
+import com.specular.form.passport.LogoutForm;
+import com.specular.form.passport.RegisterForm;
 import com.specular.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

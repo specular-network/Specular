@@ -1,9 +1,9 @@
 package com.specular.service;
 
 import com.specular.dto.UserDto;
-import com.specular.form.LoginForm;
-import com.specular.form.LogoutForm;
-import com.specular.form.RegisterForm;
+import com.specular.form.passport.LoginForm;
+import com.specular.form.passport.LogoutForm;
+import com.specular.form.passport.RegisterForm;
 
 /**
  * @author jzx
@@ -42,4 +42,11 @@ public interface AuthService {
      * @param email
      */
     void sendSmsVerif(String email);
+    
+    /**
+     * 通过token获取用户信息
+     * @param token
+     * @return
+     */
+    UserDto getUserInfoByToken(String token);
 }

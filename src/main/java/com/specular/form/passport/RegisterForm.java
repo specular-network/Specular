@@ -1,4 +1,4 @@
-package com.specular.form;
+package com.specular.form.passport;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

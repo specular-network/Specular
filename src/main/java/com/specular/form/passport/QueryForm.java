@@ -1,16 +1,13 @@
-package com.specular.form;
+package com.specular.form.passport;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
 
 /**
  * @author jzx
- * @date 2019/03/01 11:35
+ * @date 2019/03/01 11:54
  * @Description:
  */
-@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LoginForm {
-    String username;
-    String password;
+public class QueryForm {
+    String token;
 }

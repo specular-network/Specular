@@ -26,4 +26,9 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
      * @return
      */
     Optional<User> findFirstByEmail(String email);
+    
+    /**
+     * 如果token获取用户信息
+     */
+    Optional<User> findFirstByTokenCode(String token);
 }
