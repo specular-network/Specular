@@ -2,6 +2,8 @@ language: java
 jdk:
   - oraclejdk8
   - openjdk8
+before_install:
+  - chmod +x mvnw
 script:
   - mvn clean package -DskipTests=true
 after_success:
