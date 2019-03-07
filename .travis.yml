@@ -2,15 +2,11 @@ language: java
 jdk:
   - oraclejdk8
   - openjdk8
-cache:
-  directories:
-  - "$HOME/.cache"
-deploy:
-  provider: script
-  script: "mvn clean install -Dmaven.test.skip=true -Ptest"
-  skip_cleanup: true
-  on:
-    tags: true
+script:
+  - mvn clean package -DskipTests=true
+after_success:
+  - echo "success"
+
 notifications:
   email:
     recipients:
