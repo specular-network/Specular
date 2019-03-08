@@ -1,7 +1,6 @@
 package com.specular.entity;
 
-import com.specular.listener.BiuListener;
-import lombok.Builder;
+import com.specular.listener.TagListener;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -16,11 +15,10 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@SQLDelete(sql = "update biu set deleted_at = UNIX_TIMESTAMP() where id = ?")
+@SQLDelete(sql = "update tag set deleted_at = UNIX_TIMESTAMP() where id = ?")
 @Where(clause = "deleted_at = 0")
-@EntityListeners(BiuListener.class)
-@Builder
-public class Biu {
+@EntityListeners(TagListener.class)
+public class Tag {
     
     
     /**
@@ -32,12 +30,9 @@ public class Biu {
     /**
      * biu 内容
      */
-    private String content;
+    private String name;
     
-    /**
-     * biu缓存的tag
-     */
-    private String tags;
+    
     /**
      * 创建用户
      */

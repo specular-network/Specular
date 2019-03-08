@@ -26,5 +26,6 @@ public class RegisterForm {
     /**
      * 手机号
      */
+
     String phone;
 }

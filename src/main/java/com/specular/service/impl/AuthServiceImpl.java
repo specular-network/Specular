@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.specular.constant.BaseConstant.*;
+
 /**
  * @author jzx
  * @date 2019/03/01 11:33
@@ -88,24 +90,22 @@ public class AuthServiceImpl implements AuthService {
             throw new BusinessException(BusinessExceptionEnum.MAILBOX_IS_ALREADY_OCCUPIED);
         });
         UserDto userDto = new UserDto();
-        User user = new User();
-        BeanUtils.copyProperties(registerForm, user);
-        user.setPassword(digestService.encrypt(registerForm.getPassword()));
-        user.setTokenCode(UUID.randomUUID().toString());
-        user.setCreatedAt(DateUtils.getTimeSpan());
-        user.setUpdatedAt(DateUtils.getTimeSpan());
-        user.setDeletedAt(0);
-        user.setMailboxValidation(0);
-        user.setSmsValidation(0);
-        user.setPhone(registerForm.getPhone());
-        user.setLastLoginIp(httpServletRequest.getRemoteAddr());
-        String userAgent = httpServletRequest.getHeader(HttpHeaders.USER_AGENT);
-        if (userAgent.isEmpty()) {
-            log.info("User-Agent is Empty");
-            user.setLastLoginUa("");
-        } else {
-            user.setLastLoginUa(httpServletRequest.getHeader(HttpHeaders.USER_AGENT));
-        }
+    
+        User user = User.builder()
+                            .email(registerForm.getEmail())
+                            .username(registerForm.getUsername())
+                            .password(digestService.encrypt(registerForm.getPassword()))
+                            .tokenCode(UUID.randomUUID().toString())
+                            .tags(DEFAULT_TAGS)
+                            .phone(registerForm.getPhone())
+                            .lastLoginIp(httpServletRequest.getRemoteAddr())
+                            .lastLoginUa(httpServletRequest.getHeader(HttpHeaders.USER_AGENT))
+                            .mailboxValidation(DEFAULT_EMAILVALIDATION)
+                            .smsValidation(DEFAULT_SMSVALIDATION)
+                            .deletedAt(DEFAULT_DELETED_AT)
+                            .createdAt(DateUtils.getTimeSpan())
+                            .updatedAt(DateUtils.getTimeSpan())
+                            .build();
         user = userRepository.save(user);
         BeanUtils.copyProperties(user, userDto);
         return userDto;

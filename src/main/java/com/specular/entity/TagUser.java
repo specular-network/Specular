@@ -1,12 +1,13 @@
 package com.specular.entity;
 
-import com.specular.listener.BiuListener;
-import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author jzx
@@ -16,11 +17,9 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@SQLDelete(sql = "update biu set deleted_at = UNIX_TIMESTAMP() where id = ?")
+@SQLDelete(sql = "update tag_user set deleted_at = UNIX_TIMESTAMP() where id = ?")
 @Where(clause = "deleted_at = 0")
-@EntityListeners(BiuListener.class)
-@Builder
-public class Biu {
+public class TagUser {
     
     
     /**
@@ -30,14 +29,16 @@ public class Biu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /**
-     * biu 内容
+     * tag id
      */
-    private String content;
+    private Long tagId;
     
     /**
-     * biu缓存的tag
+     * user id
      */
-    private String tags;
+    private Long userId;
+    
+    
     /**
      * 创建用户
      */

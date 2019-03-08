@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  */
 @RestController
-@RequestMapping("api/test")
+@RequestMapping("api/tag")
 @Slf4j
 public class TagController extends PublicController {
     

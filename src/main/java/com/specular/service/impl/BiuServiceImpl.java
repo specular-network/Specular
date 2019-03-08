@@ -10,12 +10,13 @@ import com.specular.repository.BiuRepository;
 import com.specular.service.AuthService;
 import com.specular.service.BiuService;
 import com.specular.util.DateUtils;
+import com.specular.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import static com.specular.constant.BaseConstant.DEFAULT_DELETED_AT;
 
 /**
  * @author jzx
@@ -34,20 +35,22 @@ public class BiuServiceImpl implements BiuService {
     
     @Override
     public void make(MakeBiuForm makeBiuForm) {
-        Biu biu = new Biu();
-        BeanUtils.copyProperties(makeBiuForm, biu);
         UserDto userDto = authService.getUserInfoByToken(makeBiuForm.getToken());
-        biu.setCreatedUserId(userDto.getId());
-        biu.setUpdatedUserId(userDto.getId());
-        biu.setCreatedAt(DateUtils.getTimeSpan());
-        biu.setUpdatedAt(DateUtils.getTimeSpan());
-        biu.setDeletedAt(0);
+        Biu biu = Biu.builder()
+                          .content(makeBiuForm.getContent())
+                          .tags(JsonUtils.objToStr(makeBiuForm.getTags()))
+                          .createdAt(DateUtils.getTimeSpan())
+                          .updatedAt(DateUtils.getTimeSpan())
+                          .createdUserId(userDto.getId())
+                          .createdUserId(userDto.getId())
+                          .deletedAt(DEFAULT_DELETED_AT)
+                          .build();
         biuRepository.save(biu);
     }
     
     @Override
     public void del(DelBiuForm delBiuForm) {
-        Biu biu=biuRepository.findById(delBiuForm.getId()).orElseThrow(() ->new BusinessException(BusinessExceptionEnum.BIU_NOT_FOUND_ERROR));
+        Biu biu = biuRepository.findById(delBiuForm.getId()).orElseThrow(() -> new BusinessException(BusinessExceptionEnum.BIU_NOT_FOUND_ERROR));
         UserDto userDto = authService.getUserInfoByToken(delBiuForm.getToken());
         biu.setUpdatedUserId(userDto.getId());
         biu.setDeletedAt(DateUtils.getTimeSpan());
