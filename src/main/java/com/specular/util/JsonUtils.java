@@ -1,6 +1,7 @@
 package com.specular.util;
 
-import cn.emay.sdk.util.json.gson.Gson;
+
+import com.google.gson.Gson;
 
 /**
  * @author jzx
