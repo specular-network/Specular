@@ -1,5 +1,6 @@
 package com.specular.listener;
 
+import com.specular.entity.Tag;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,14 +17,30 @@ public class TagListener {
     
     
     @PrePersist
-    void onPrePersist() {}
-    @PostPersist void onPostPersist() {}
+    void onPrePersist(Tag tag) {
+    }
+    
+    @PostPersist
+    void onPostPersist(Tag tag) {
+    }
+    
     @PostLoad
-    void onPostLoad() {}
+    void onPostLoad(Tag tag) {
+    }
+    
     @PreUpdate
-    void onPreUpdate() {}
+    void onPreUpdate(Tag tag) {
+    }
+    
     @PostUpdate
-    void onPostUpdate() {}
-    @PreRemove void onPreRemove() {}
-    @PostRemove void onPostRemove() {}
+    void onPostUpdate(Tag tag) {
+    }
+    
+    @PreRemove
+    void onPreRemove(Tag tag) {
+    }
+    
+    @PostRemove
+    void onPostRemove(Tag tag) {
+    }
 }
