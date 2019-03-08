@@ -1,4 +1,4 @@
-package com.specular.base;
+package com.specular;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
