@@ -38,6 +38,11 @@ public class Biu {
      * biu缓存的tag
      */
     private String tags;
+    
+    /**
+     * 提醒某人
+     */
+    private String atUser;
     /**
      * 创建用户
      */

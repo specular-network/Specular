@@ -1,6 +1,7 @@
 package com.specular.form.biu;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.specular.form.at.AtForm;
 import com.specular.form.auth.BaseAuthForm;
 import com.specular.form.tag.TagForm;
 import lombok.Data;
@@ -17,4 +18,5 @@ import java.util.List;
 public class MakeBiuForm extends BaseAuthForm {
     String content;
     List<TagForm> tags;
+    List<AtForm> at;
 }
